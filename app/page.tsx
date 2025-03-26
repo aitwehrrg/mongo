@@ -5,13 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [feedback, setFeedback] = useState("");
 
   const submitFeedback = async () => {
-    if (!feedback.trim() || !name.trim()) return;
+    if (!feedback.trim()) return;
     await fetch("/api/feedback", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -22,64 +23,62 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white text-gray-900">
-      {/* Hero Section */}
-      <header className="bg-gray-900 text-white text-center py-16">
-        <h1 className="text-4xl font-bold">
-          Welcome to Our Professional Website
-        </h1>
-        <p className="mt-4 text-lg max-w-2xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-          odio. Praesent libero.
+    <div className="bg-black text-white min-h-screen flex flex-col items-center">
+      <header className="w-full max-w-5xl text-center py-20">
+        <h1 className="text-5xl font-bold tracking-tight">Welcome to Our Modern Web Platform</h1>
+        <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vehicula dui at erat pretium, eu hendrerit justo ultricies.
         </p>
       </header>
-
-      {/* Content Section */}
-      <section className="py-12 px-6 max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl font-bold">About Us</h2>
-        <p className="mt-4 text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          varius enim in eros elementum tristique. Duis cursus, mi quis viverra
-          ornare, eros dolor interdum nulla.
-        </p>
+      <section className="w-full max-w-5xl grid md:grid-cols-2 gap-10 px-6">
+        <div className="space-y-6">
+          <h2 className="text-3xl font-semibold">Our Mission</h2>
+          <p className="text-gray-400">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in urna justo. Duis eget orci nec purus vehicula feugiat.
+          </p>
+          <p className="text-gray-400">
+            Vestibulum eget facilisis purus. Morbi congue lorem id sapien convallis tincidunt. Sed id dui nisl.
+          </p>
+        </div>
+        <Image src="/images/modern-ui.jpg" alt="Modern UI" width={100} height={100} className="rounded-lg shadow-lg" />
       </section>
-
-      {/* Services Section */}
-      <section className="py-12 bg-gray-100 px-6 text-center">
-        <h2 className="text-3xl font-bold">Our Services</h2>
-        <p className="mt-4 text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dapibus
-          erat at ligula vestibulum, eu posuere nisl tempor.
-        </p>
+      <section className="w-full max-w-5xl mt-20">
+        <h2 className="text-3xl font-semibold text-center mb-6">What We Offer</h2>
+        <div className="grid md:grid-cols-3 gap-6 px-6">
+          <Card className="bg-zinc-900 border border-gray-800 p-6">
+            <h3 className="text-xl font-bold">Feature One</h3>
+            <p className="text-gray-400 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </Card>
+          <Card className="bg-zinc-900 border border-gray-800 p-6">
+            <h3 className="text-xl font-bold">Feature Two</h3>
+            <p className="text-gray-400 mt-2">Vestibulum eget facilisis purus. Morbi congue lorem id sapien convallis.</p>
+          </Card>
+          <Card className="bg-zinc-900 border border-gray-800 p-6">
+            <h3 className="text-xl font-bold">Feature Three</h3>
+            <p className="text-gray-400 mt-2">Sed id dui nisl. Duis eget orci nec purus vehicula feugiat.</p>
+          </Card>
+        </div>
       </section>
-
-      {/* Feedback Section */}
-      <section className="py-12 px-6 bg-gray-800 text-white text-center">
-        <h2 className="text-3xl font-bold mb-6">Submit Anonymous Feedback</h2>
-        <Card className="w-full max-w-lg mx-auto p-6 bg-gray-900 border-gray-700 shadow-lg rounded-xl">
-          <CardContent className="space-y-4">
-            <Input
-              type="text"
-              placeholder="Your name (Optional)"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring focus:ring-gray-500"
-            />
-            <Textarea
-              placeholder="Write your feedback..."
-              value={feedback}
-              onChange={(e) => setFeedback(e.target.value)}
-              className="p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring focus:ring-gray-500 min-h-[100px] max-h-[300px]"
-              rows={3}
-            />
-            <Button
-              onClick={submitFeedback}
-              className="w-full py-3 text-lg font-semibold bg-blue-600 hover:bg-blue-700 rounded-lg transition-all"
-            >
-              Submit
-            </Button>
-          </CardContent>
-        </Card>
+      <section className="w-full max-w-lg bg-zinc-900 rounded-lg shadow-lg p-6 border border-gray-800 mt-20 mb-20">
+        <h2 className="text-2xl font-semibold mb-4 text-center">Submit Anonymous Feedback</h2>
+        <CardContent className="space-y-4">
+          <Input
+            type="text"
+            placeholder="Your name (Optional)"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="p-3 bg-zinc-800 border border-gray-700 rounded-lg focus:ring focus:ring-gray-600"
+          />
+          <Textarea
+            placeholder="Write your feedback..."
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            className="p-3 bg-zinc-800 border border-gray-700 rounded-lg focus:ring focus:ring-gray-600 min-h-[120px]"
+          />
+          <Button onClick={submitFeedback} className="w-full py-3 text-lg font-semibold bg-white text-black rounded-lg transition hover:bg-gray-200">
+            Submit
+          </Button>
+        </CardContent>
       </section>
     </div>
   );

@@ -20,26 +20,26 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="p-10 bg-gray-900 text-white min-h-screen">
-      <h1 className="text-2xl font-bold mb-6 text-center">
+    <div className="p-10 bg-black text-white min-h-screen flex flex-col items-center">
+      <h1 className="text-3xl font-bold mb-6 text-center">
         Feedback Dashboard
       </h1>
-      <div className="flex justify-end mb-4">
-        <span className="mr-2">Show Anonymous</span>
+      <div className="flex justify-end w-full max-w-3xl mb-4">
+        <span className="mr-2 text-gray-400">Show Anonymous</span>
         <Switch checked={showAnonymous} onCheckedChange={setShowAnonymous} />
       </div>
-      <div className="space-y-4">
+      <div className="w-full max-w-3xl space-y-4">
         {feedbacks.map((item, index) => (
           <Card
             key={index}
-            className="p-4 bg-gray-800 border-gray-700 shadow-md rounded-lg"
+            className="p-4 bg-zinc-900 border border-gray-800 shadow-md rounded-lg"
           >
             <CardContent>
               <h2 className="font-semibold text-lg">
                 {showAnonymous ? "Anonymous" : item.name || "Anonymous"}
               </h2>
-              <p className="mt-1">{item.feedback}</p>
-              <span className="text-sm text-gray-400 block mt-2">
+              <p className="mt-1 text-gray-300">{item.feedback}</p>
+              <span className="text-sm text-gray-500 block mt-2">
                 {new Date(item.createdAt).toLocaleString()}
               </span>
             </CardContent>
