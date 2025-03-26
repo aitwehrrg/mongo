@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { useEffect, useState } from "react";
 
-export function Dashboard() {
+export default function Dashboard() {
   const [feedbacks, setFeedbacks] = useState<
     { name: string; feedback: string; createdAt: Date }[]
   >([]);
@@ -49,4 +49,3 @@ export function Dashboard() {
     </div>
   );
 }
-export default Dashboard;
