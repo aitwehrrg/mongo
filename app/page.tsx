@@ -6,13 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submitFeedback = async () => {
-    if (!feedback.trim()) return;
+    if (!feedback.trim() || isSubmitting) return;
+    setIsSubmitting(true);
     await fetch("/api/feedback", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -20,6 +23,8 @@ export default function Home() {
     });
     setName("");
     setFeedback("");
+    Toaster({ });
+    setTimeout(() => setIsSubmitting(false), 3000);
   };
 
   return (
@@ -75,11 +80,12 @@ export default function Home() {
             onChange={(e) => setFeedback(e.target.value)}
             className="p-3 bg-zinc-800 border border-gray-700 rounded-lg focus:ring focus:ring-gray-600 min-h-[120px]"
           />
-          <Button onClick={submitFeedback} className="w-full py-3 text-lg font-semibold bg-white text-black rounded-lg transition hover:bg-gray-200">
-            Submit
+          <Button onClick={submitFeedback} disabled={isSubmitting} className="w-full py-3 text-lg font-semibold bg-white text-black rounded-lg transition hover:bg-gray-200 disabled:opacity-50">
+            {isSubmitting ? "Submitting..." : "Submit"}
           </Button>
         </CardContent>
       </section>
     </div>
   );
 }
+
